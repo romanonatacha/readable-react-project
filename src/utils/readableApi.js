@@ -1,3 +1,5 @@
+import { stringify } from "querystring";
+
 const api = "http://localhost:3001"
 
 let token = localStorage.token
@@ -43,3 +45,12 @@ export const getAllPosts = () => fetch(`${api}/posts`, { headers })
 export const getAllPostsByCategory = (categoryPath) => fetch(`${api}/${categoryPath}/posts`, {headers})
   .then(res => res.json())
   .then(data => normalizeObjectBy('id', data))
+
+export const addPost = (postData) => fetch(`${api}/posts`, {
+  headers,
+  method: 'POST',
+  body: JSON.stringify(postData)
+})
+  .then(res => res.json())
+  .then(data => data)
+  .catch(error => console.warn(error))
