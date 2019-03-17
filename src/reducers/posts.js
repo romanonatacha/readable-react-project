@@ -1,10 +1,12 @@
-import { combineReducers } from 'redux'
-import authedUser from './authedUser'
-import categories from './categories'
-import posts from './posts'
+import { SET_ALL_POSTS } from '../actions/posts'
 
-export default combineReducers({
-  authedUser,
-  categories,
-  posts,
-})
+export default function posts(state = {}, action) {
+  switch(action.type){
+    case SET_ALL_POSTS:
+      return {
+        ...action.posts
+      }
+    default:
+      return state
+  }
+}

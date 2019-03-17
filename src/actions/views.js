@@ -1,4 +1,4 @@
-import { getHomeData } from '../utils/readableApi'
+import { getHomeData, getCategoryData } from '../utils/readableApi'
 import { setAllCategories } from './categories'
 import { setAllPosts } from './posts'
 import { setAuthedUser } from './authedUser'
@@ -13,5 +13,17 @@ export function handleHomeData () {
       dispatch(setAuthedUser(AUTHED_ID))
     })
     .catch(error =>  console.warn(error))
+  }
+}
+
+export function handleCategoryData (categoryPath) {
+  return (dispatch) => {
+    return getCategoryData(categoryPath)
+      .then(({categories, posts}) => {
+        dispatch(setAllCategories(categories))
+        dispatch(setAllPosts(posts))
+        dispatch(setAuthedUser(AUTHED_ID))
+      })
+      .catch(error => console.warn(error))
   }
 }
