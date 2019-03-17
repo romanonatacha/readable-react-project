@@ -6,9 +6,27 @@ import { connect } from 'react-redux'
 import { handleCategoryData } from '../actions/views'
 
 class Category extends Component {
+
+  state = {
+    currentCategory: ''
+  }
+
   componentDidMount() {
+    this.setState(() => ({
+      currentCategory: this.props.match.params.categoryPath
+    }))
     this.props.dispatch(handleCategoryData(this.props.match.params.categoryPath))
   }
+
+  componentDidUpdate() {
+    if (this.state.currentCategory !== this.props.match.params.categoryPath) {
+      this.setState(() => ({
+        currentCategory: this.props.match.params.categoryPath
+      }))
+      this.props.dispatch(handleCategoryData(this.props.match.params.categoryPath))
+    }
+  }
+  
 
   render() {
     return (
@@ -19,6 +37,10 @@ class Category extends Component {
           <div className='content-container'>
             <h3>Category - {this.props.match.params.categoryPath}</h3>
             <PostList postsIds={this.props.postsIds} />
+            {this.props.postsIds.length
+              ? <PostList postsIds={this.props.postsIds} />
+              : <p>No posts</p>
+            }
           </div>
         </div>
 
