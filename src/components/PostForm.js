@@ -7,6 +7,7 @@ class PostForm extends Component {
     title: '',
     category: '',
     body: '',
+    submited: false
   }
 
   handleChange = (e) => {
@@ -28,7 +29,19 @@ class PostForm extends Component {
     ))
   }
 
+  this.setState(() => ({
+    title: '',
+    category: '',
+    body: '',
+    submited: true
+  }))
+
   render() {
+
+    if (this.state.submited) {
+      return <p className='message-ok'>New post saved</p>
+    }
+
     return (
       <Fragment>
         <form onSubmit={this.handleSubmit}>
@@ -47,9 +60,13 @@ class PostForm extends Component {
             <label htmlFor='category'>category</label>
             <select onChange={this.handleChange} value={this.state.category} id='category' required>
               <option value="">Pick one here...</option>
-              <option value="react">react</option>
-              <option value="redux">redux</option>
-              <option value="udacity">udacity</option>
+              {Object.keys(this.props.categories).map(category =>
+                <option
+                  value={this.props.categories[category].path}
+                  key={this.props.categories[category].path}>
+                    {this.props.categories[category].path}
+                </option>
+              )}
             </select>
           </p>
           <p>
@@ -63,11 +80,17 @@ class PostForm extends Component {
               required
             />
           </p>
-          <p><input type="submit" className='button' /></p>
+          <p><input type="submit" className='button' value='create new post' /></p>
         </form>
       </Fragment>
     )
   }
 }
 
-export default connect()(PostForm)
+function mapStateToProps ({categories}) {
+  return {
+    categories
+  }
+}
+
+export default connect(mapStateToProps)(PostForm)
