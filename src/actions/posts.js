@@ -1,7 +1,8 @@
-import { addPost as addPostAPI } from '../utils/readableApi'
+import { addPost as addPostAPI, getPostData } from '../utils/readableApi'
 
 export const SET_ALL_POSTS = 'SET_ALL_POSTS'
 export const ADD_POST = 'ADD_POST'
+export const SET_POST = 'SET_POST'
 
 export function setAllPosts (posts) {
   return {
@@ -10,7 +11,7 @@ export function setAllPosts (posts) {
   }
 }
 
-function addPost (post) {
+export function addPost (post) {
   return {
     type: ADD_POST,
     post

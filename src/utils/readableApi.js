@@ -55,3 +55,18 @@ export const addPost = (postData) => fetch(`${api}/posts`, {
   .then(res => res.json())
   .then(data => data)
   .catch(error => console.warn(error))
+
+export const getPostById = (id) => fetch(`${api}/posts/${id}`, { headers })
+  .then(res => res.json())
+  .then(data => data)
+  .catch(error => console.warn(error))
+
+export const getPostData (id) => Promise.all([
+  getPostById(id),
+  getAllCategories(),
+]).then(([post, categories]) => ({
+  post,
+  categories
+}))
+
+    
