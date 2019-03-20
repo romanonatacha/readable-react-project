@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { formatDate } from '../utils/helpers'
-import VoteScore from './VoteScore'
+import PostVoteScore from './VoteScore'
 
 class PostListItem extends Component {
   render() {
@@ -20,7 +20,7 @@ class PostListItem extends Component {
           <span className='post-score'>{post.voteScore}</span>
           <a href='#' className='post-vote post-vote-down'>Vote Down</a>
         </div>
-        <VoteScore postId={post.id} score={post.voteScore} />
+        <PostVoteScore postId={post.id} score={post.voteScore} />
       </div>
     )
   }

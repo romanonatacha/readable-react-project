@@ -6,7 +6,7 @@ import Header from './Header'
 import Footer from './Footer'
 import CommentList from './CommentList'
 import CommentForm from './CommentForm'
-import VoteScore from './VoteScore'
+import PostVoteScore from './PostVoteScore'
 
 class Post extends Component {
   componentDidMount() {
@@ -38,7 +38,7 @@ class Post extends Component {
                   <span className='post-'>{post.voteScore}</span>
                   <a href='#' className='post-vote post-vote-down'>Vote Down</a>
                 </div>
-                <VoteScore postId={this.props.match.params.id} score={post.voteScore} />
+                <PostVoteScore postId={this.props.match.params.id} score={post.voteScore} />
                 <CommentList postId={this.props.match.params.id} />
                 <CommentForm />
               </div>
