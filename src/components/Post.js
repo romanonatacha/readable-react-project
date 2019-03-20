@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { handlePostData } from '../actions/views'
+import { formatDate } from '../utils/helpers'
 import Header from './Header'
 import Footer from './Footer'
 import CommentList from './CommentList'
@@ -24,7 +25,7 @@ class Post extends Component {
                 <h2>{post.title}</h2>
                 <p className='post-info'>
                   <span className='post-author'>By: {post.author}</span>
-                  <span className='post-datetime'>Date and Time: {post.timestamp}</span>
+                  <span className='post-datetime'>Date and Time: {formatDate(post.timestamp)}</span>
                   <span className='post-comment-count'>Comments: {post.commentCount}</span>
                 </p>
 
