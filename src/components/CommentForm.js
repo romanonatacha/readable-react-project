@@ -5,6 +5,8 @@ class CommentForm extends Component {
     return (
       <div>
         CommentForm
+        <h3>Comment something</h3>
+        <p>comment form</p>
       </div>
     )
   }

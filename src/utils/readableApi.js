@@ -61,12 +61,21 @@ export const getPostById = (id) => fetch(`${api}/posts/${id}`, { headers })
   .then(data => data)
   .catch(error => console.warn(error))
 
+export const getCommentsByPostId = (id) => fetch(`${api}/posts/${id}/comments`, { headers })
+  .then(res => res.json())
+  .then(data => ({
+      [id]: normalizeObjectBy('id', data)
+  }))
+  .catch(error => console.warn(error))
+
 export const getPostData (id) => Promise.all([
   getPostById(id),
   getAllCategories(),
-]).then(([post, categories]) => ({
+  getCommentsByPostId()
+]).then(([post, categories, comments]) => ({
   post,
-  categories
+  categories,
+  comments
 }))
 
     

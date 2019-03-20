@@ -1,6 +1,7 @@
 import { getHomeData, getCategoryData, getAllCategories, getPostData } from '../utils/readableApi'
 import { setAllCategories } from './categories'
 import { setAllPosts, addPost } from './posts'
+import { setAllCommentsForPost } from './comments'
 import { setAuthedUser } from './authedUser'
 
 const AUTHED_ID = 'thingone'
@@ -44,13 +45,14 @@ export function handlePostData (id) {
     const { posts } = getState()
 
     return getPostData(id)
-      .then(({categories, post}) => {
+      .then(({categories, post, comments}) => {
         dispatch(setAllCategories(categories))
         if (posts && posts[id]) {
 
         } else {
           dispatch(addPost(post))
         }
+        dispatch(setAllCommentsForPost(comments))
         dispatch(setAuthedUser(AUTHED_ID))
       })
       .catch(error => console,warn(error))
