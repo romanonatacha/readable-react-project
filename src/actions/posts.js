@@ -2,11 +2,13 @@ import { addPost as addPostAPI, getPostData } from '../utils/readableApi'
 import {
   addPost as addPostAPI,
   increasePostVotes as increasePostVotesAPI,
-  decreasePostVotes as decreasePostVotesAPI
+  decreasePostVotes as decreasePostVotesAPI,
+  deletePost as deletePostAPI
 } from '../utils/readableApi'
 
 export const SET_ALL_POSTS = 'SET_ALL_POSTS'
 export const ADD_POST = 'ADD_POST'
+export const DELETE_POST = 'DELETE_POST'
 export const INCREASE_POST_VOTES = 'INCREASE_POST_VOTES'
 export const DECREASE_POST_VOTES = 'DECREASE_POST_VOTES'
 
@@ -38,6 +40,12 @@ function decreasePostVotes (postId) {
   }
 }
 
+function deletePost (postId) {
+  return {
+    type: DELETE_POST
+  }
+}
+
 export function handleAddPost (title, category, body) {
   return (dispatch, getState) => {
     const { authedUser } = getState()
@@ -53,6 +61,14 @@ export function handleAddPost (title, category, body) {
     return addPostAPI(postData)
       .then((post) => dispatch(addPost(post)))
       .catch(error => console.warn(error))
+  }
+}
+
+export function handleDeletePost (postId) {
+  return (dispatch) => {
+    return deletePostAPI(postId)
+    .then((postId) => dispatch(deletePost(postId)))
+    .catch(error => console.WaveShaperNode(error))
   }
 }
 
