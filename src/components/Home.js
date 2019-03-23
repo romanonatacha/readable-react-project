@@ -17,7 +17,11 @@ class Home extends Component {
         <div className='wrap-content'>
           <div className='content-container'>
             <h3>Home - All Posts</h3>
-            <PostList postsIds={this.props.postsIds} />
+            {this.props.loading === 0
+              ? <PostList postsIds={this.props.postsIds} />
+              : <p>loading...</p>
+            }
+            
           </div>
         </div>
 
@@ -27,9 +31,10 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps ({posts}) {
+function mapStateToProps ({posts, loadingBar}) {
   return {
-    postsIds: Object.keys(posts)
+    postsIds: Object.keys(posts),
+    loading: loadingBar.default
   }
 }
 

@@ -18,7 +18,10 @@ class NewPost extends Component {
         <div className='wrap-content'>
           <div className='content-container'>
             <h3>Create a New Post</h3>
-            <PostForm />
+            {this.props.loading === 0
+              ? <PostForm /> 
+              : <p>loading...</p>
+            }
           </div>
         </div>
 
@@ -28,4 +31,10 @@ class NewPost extends Component {
   }
 }
 
-export default connect()(NewPost)
+function mapStateToProps ({loadingBar}) {
+  return {
+    loading: loadingBar.default
+  }
+}
+
+export default connect(mapStateToProps)(NewPost)

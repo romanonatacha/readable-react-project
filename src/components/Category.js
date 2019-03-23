@@ -37,9 +37,9 @@ class Category extends Component {
           <div className='content-container'>
             <h3>Category - {this.props.match.params.categoryPath}</h3>
             <PostList postsIds={this.props.postsIds} />
-            {this.props.postsIds.length
+            {this.props.loading === 0
               ? <PostList postsIds={this.props.postsIds} />
-              : <p>No posts</p>
+              : <p>loading...</p>
             }
           </div>
         </div>
@@ -50,9 +50,10 @@ class Category extends Component {
   }
 }
 
-function mapStateToProps ({posts}) {
+function mapStateToProps ({posts, loadingBar}) {
   return {
-    postsIds: Object.keys(posts)
+    postsIds: Object.keys(posts),
+    loading: loadingBar.default
   }
 }
 

@@ -3,15 +3,18 @@ import { setAllCategories } from './categories'
 import { setAllPosts, addPost } from './posts'
 import { setAllCommentsForPost } from './comments'
 import { setAuthedUser } from './authedUser'
+import { showLoading, hideLoading } from 'react-redux-loading'
 
 const AUTHED_ID = 'thingone'
 
 export function handleHomeData () {
   return (dispatch) => {
+    dispacth(showLoading())
     return getHomeData().then(({categories, posts}) => {
       dispatch(setAllCategories(categories))
       dispatch(setAllPosts(posts))
       dispatch(setAuthedUser(AUTHED_ID))
+      dispatch(hideLoading())
     })
     .catch(error =>  console.warn(error))
   }
@@ -19,11 +22,13 @@ export function handleHomeData () {
 
 export function handleCategoryData (categoryPath) {
   return (dispatch) => {
+    dispatch(showLoading())
     return getCategoryData(categoryPath)
       .then(({categories, posts}) => {
         dispatch(setAllCategories(categories))
         dispatch(setAllPosts(posts))
         dispatch(setAuthedUser(AUTHED_ID))
+        dispatch(hideLoading())
       })
       .catch(error => console.warn(error))
   }
@@ -31,10 +36,12 @@ export function handleCategoryData (categoryPath) {
 
 export function handlePostNewData () {
   return (dispatch) => {
+    dispatch(showLoading())
     return getAllCategories()
       .then(categories => {
         dispatch(setAllCategories(categories))
         dispatch(setAuthedUser(AUTHED_ID))
+        dispatch(hideLoading())
       })
       .catch(error => console.warn(error))
   }
@@ -42,6 +49,7 @@ export function handlePostNewData () {
 
 export function handlePostData (id) {
   return (dispatch, getState) => {
+    dispatch(showLoading())
     const { posts } = getState()
 
     return getPostData(id)
@@ -54,6 +62,7 @@ export function handlePostData (id) {
         }
         dispatch(setAllCommentsForPost(comments))
         dispatch(setAuthedUser(AUTHED_ID))
+        dispatch(hideLoading())
       })
       .catch(error => console,warn(error))
   }

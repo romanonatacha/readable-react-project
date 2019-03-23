@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { loadingBarReducer } from 'react-redux-loading'
 import authedUser from './authedUser'
 import categories from './categories'
 import posts from './posts'
@@ -8,5 +9,6 @@ export default combineReducers({
   authedUser,
   categories,
   posts,
-  comments
+  comments,
+  loadingBar: loadingBarReducer
 })
