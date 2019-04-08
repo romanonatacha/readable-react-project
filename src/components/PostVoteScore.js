@@ -22,9 +22,13 @@ class PostVoteScore extends Component {
   render() {
     return (
       <div className='post-votescore'>
-        <button onClick={this.handleDecrease} className='post-vote post-vote-down'>Down</button>
-        <span className='post-score'>{this.props.score}</span>
-        <button onClick={this.handleIncrease} className='post-vote post-vote-up'>Up</button>
+        <button onClick={this.handleIncrease} className='post-vote post-vote-up'>Vote Up</button>
+        <span className='post-score'>
+          <span className='post-score-inner'>
+            {this.props.score}
+          </span>
+        </span>
+        <button onClick={this.handleDecrease} className='post-vote post-vote-down'>Vote Down</button>
       </div>
     )
   }

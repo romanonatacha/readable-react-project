@@ -52,19 +52,28 @@ export const addPost = (postData) => fetch(`${api}/posts`, {
   })
   .then(res => res.json())
   .then(data => data)
-  .catch(error => console.log(error))
+  .catch(error => console.warn(error))
+
+export const editPost = (commentData) => fetch(`${api}/posts/${commentData.id}`, {
+    headers,
+    method: 'PUT',
+    body: JSON.stringify(commentData)
+  })
+  .then(res => res.json())
+  .then(data => data)
+  .catch(error => console.warn(error))
 
 export const getPostById = (id) => fetch(`${api}/posts/${id}`, { headers })
   .then(res => res.json())
   .then(data => data)
-  .catch(error => console.log(error))
+  .catch(error => console.warn(error))
 
 export const getCommentsByPostId = (id) => fetch(`${api}/posts/${id}/comments`, { headers })
   .then(res => res.json())
   .then(data => ({
     [id]: normalizeObjectBy('id', data)
   }))
-  .catch(error => console.log(error))
+  .catch(error => console.warn(error))
 
 export const getPostData = (id) => Promise.all([
   getPostById(id),
@@ -77,14 +86,14 @@ export const getPostData = (id) => Promise.all([
 }))
 .catch(error =>  console.warn(error))
 
-export const  deletePost = (id) => 
+export const deletePost = (id) =>
   fetch(`${api}/posts/${id}`, {
     headers,
-    method: 'DELETE'
+    method: 'DELETE',
   })
   .then(res => res.json())
   .then(data => data)
-  .catch(error => console.warn(error))
+  .catch(error =>  console.warn(error))
 
 export const increasePostVotes = (id) =>
   fetch(`${api}/posts/${id}`, {
@@ -126,10 +135,29 @@ export const decreaseCommentVotes = (id) =>
   .then(data => data)
   .catch(error =>  console.warn(error))
 
-  export const  deleteComment = (id) => 
-    fetch(`${api}/comments/${id}`, {
-      headers,
-      method: 'DELETE'
-    })
-    .then(res => res.json())
-    .then(data => data)
+export const deleteComment = (id) =>
+  fetch(`${api}/comments/${id}`, {
+    headers,
+    method: 'DELETE',
+  })
+  .then(res => res.json())
+  .then(data => data)
+  .catch(error =>  console.warn(error))
+
+export const addComment = (commentData) => fetch(`${api}/comments`, {
+    headers,
+    method: 'POST',
+    body: JSON.stringify(commentData)
+  })
+  .then(res => res.json())
+  .then(data => data)
+  .catch(error => console.warn(error))
+
+export const editComment = (commentData) => fetch(`${api}/comments/${commentData.id}`, {
+    headers,
+    method: 'PUT',
+    body: JSON.stringify(commentData)
+  })
+  .then(res => res.json())
+  .then(data => data)
+  .catch(error => console.warn(error))

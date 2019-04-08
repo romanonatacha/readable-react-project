@@ -8,10 +8,12 @@ import { connect } from 'react-redux'
 import { handlePostData } from '../actions/views'
 import { handleDeletePost } from '../actions/posts'
 import { formatDate } from '../utils/helpers'
+import { Redirect } from 'react-router-dom'
 
 class Post extends Component {
   state = {
     deletedFlag: false,
+    redirectFlag: false,
   }
   componentDidMount() {
     this.props.dispatch(handlePostData(this.props.match.params.id))
@@ -19,10 +21,9 @@ class Post extends Component {
 
   handleEdit = (e) => {
     e.preventDefault()
-
-    const { dispatch, post } = this.props
-
-    //dispatch(handleEditPost(post.id))
+    this.setState(() => ({
+      redirectFlag: true,
+    }))
   }
 
   handleDelete = (e) => {
@@ -38,26 +39,36 @@ class Post extends Component {
   }
 
   render() {
-    const { post } = this.props
+    const { post, loading } = this.props
+    const { redirectFlag, deletedFlag } = this.state
+
+    if (!post && loading === 0) {
+      return <Redirect to='/404' />
+    }
+
+    if(redirectFlag === true) {
+      return <Redirect to={'/post/edit/' + this.props.post.id} />
+    }
+
     return (
       <Fragment>
         <Header />
 
         <div className='wrap-content'>
           <div className='content-container'>
-            {(this.props.loading === 0 && !this.state.deletedFlag) &&
+            {(loading === 0 && !deletedFlag) &&
               <div className='post'>
                 <h2>{post.title}</h2>
                 <p className='post-info'>
-                  <span className='post-author'>By: {post.author}</span>
-                  <span className='post-datetime'>When: {formatDate(post.timestamp)}</span>
-                  <span className='post-comment-count'>Comments: {post.commentCount}</span>
+                  <span className='post-author'>{post.author}</span>
+                  <span className='post-datetime'>{formatDate(post.timestamp)}</span>
+                  <span className='post-comment-count'>comments: {post.commentCount}</span>
                 </p>
 
-                {this.props.authedUser === post.author
+                {this.props.user.userId === post.author
                   ? <div className='post-actions'>
-                      <button onClick={this.handleEdit}>Edit Post</button>
-                      <button onClick={this.handleDelete}>Delete Post</button>
+                      <button onClick={this.handleEdit} className='button-action'>Edit Post</button>
+                      <button onClick={this.handleDelete} className='button-action'>Delete Post</button>
                     </div>
                   : null
                 }
@@ -69,16 +80,16 @@ class Post extends Component {
                 <PostVoteScore postId={this.props.match.params.id} score={post.voteScore} />
 
                 <CommentList postId={this.props.match.params.id} />
-                <CommentForm />
+                <CommentForm postId={this.props.match.params.id} />
               </div>
             }
 
-            {this.props.loading === 1 &&
+            {loading === 1 &&
               <p>Loading...</p>
             }
 
-            {this.state.deletedFlag &&
-              <p>This post was deleted</p>
+            {deletedFlag &&
+              <p className='message-ok'>This post is not here anymore :(</p>
             }
           </div>
         </div>
@@ -89,12 +100,12 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps ({posts, comments, loadingBar, authedUser}, props) {
+function mapStateToProps ({posts, comments, loadingBar, user}, props) {
   return {
     post: posts[props.match.params.id],
     comments: comments[props.match.params.id],
     loading: loadingBar.default,
-    authedUser,
+    user,
   }
 }
 

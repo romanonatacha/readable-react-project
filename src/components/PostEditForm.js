@@ -1,12 +1,10 @@
 import React, { Component, Fragment } from 'react'
-import { handleAddPost } from '../actions/posts'
+import { handleEditPost } from '../actions/posts'
 import { connect } from 'react-redux'
 
-class PostForm extends Component {
+class PostEditForm extends Component {
   state = {
-    title: '',
-    category: '',
-    body: '',
+    ...this.props.post,
     submitedFlag: false,
   }
 
@@ -22,23 +20,16 @@ class PostForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    this.props.dispatch(handleAddPost(
-      this.state.title,
-      this.state.category,
-      this.state.body,
-    ))
+    this.props.dispatch(handleEditPost(this.state))
 
     this.setState(() => ({
-      title: '',
-      category: '',
-      body: '',
       submitedFlag: true,
     }))
   }
 
   render() {
     if(this.state.submitedFlag){
-      return <p className='message-ok'>Your new post was saved.</p>
+      return <p className='message-ok'>Your post was updated.</p>
     }
     return (
       <Fragment>
@@ -74,7 +65,7 @@ class PostForm extends Component {
               required
             />
           </p>
-          <p><input type="submit" className='button' value='Create New Post' /></p>
+          <p><input type="submit" className='button' value='Update Post' /></p>
         </form>
       </Fragment>
     )
@@ -87,4 +78,4 @@ function mapStateToProps ({categories}) {
   }
 }
 
-export default connect(mapStateToProps)(PostForm)
+export default connect(mapStateToProps)(PostEditForm)

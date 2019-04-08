@@ -2,13 +2,16 @@ import React, { Component, Fragment } from 'react'
 import PostList from './PostList'
 import Header from './Header'
 import Footer from './Footer'
+import PostSort from './PostSort'
 import { connect } from 'react-redux'
 import { handleHomeData } from '../actions/views'
+import { sortPosts } from '../utils/helpers'
 
 class Home extends Component {
   componentDidMount() {
     this.props.dispatch(handleHomeData())
   }
+
   render() {
     return (
       <Fragment>
@@ -18,10 +21,12 @@ class Home extends Component {
           <div className='content-container'>
             <h3>Home - All Posts</h3>
             {this.props.loading === 0
-              ? <PostList postsIds={this.props.postsIds} />
-              : <p>loading...</p>
+              ? <Fragment>
+                  <PostSort />
+                  <PostList postsIds={this.props.postsIds} />
+                </Fragment>
+              : <p>Loading...</p>
             }
-            
           </div>
         </div>
 
@@ -31,10 +36,14 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps ({posts, loadingBar}) {
+function mapStateToProps ({posts, loadingBar, user}) {
+  const postsSortingBy = user.config.postsSortingBy
+  const postsIds = sortPosts(postsSortingBy, posts)
+
   return {
-    postsIds: Object.keys(posts),
-    loading: loadingBar.default
+    postsIds,
+    loading: loadingBar.default,
+    postsSortingBy,
   }
 }
 

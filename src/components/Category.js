@@ -4,11 +4,12 @@ import Header from './Header'
 import Footer from './Footer'
 import { connect } from 'react-redux'
 import { handleCategoryData } from '../actions/views'
+import PostSort from './PostSort'
+import { sortPosts } from '../utils/helpers'
 
 class Category extends Component {
-
   state = {
-    currentCategory: ''
+    currentCategory: '',
   }
 
   componentDidMount() {
@@ -26,7 +27,6 @@ class Category extends Component {
       this.props.dispatch(handleCategoryData(this.props.match.params.categoryPath))
     }
   }
-  
 
   render() {
     return (
@@ -36,10 +36,12 @@ class Category extends Component {
         <div className='wrap-content'>
           <div className='content-container'>
             <h3>Category - {this.props.match.params.categoryPath}</h3>
-            <PostList postsIds={this.props.postsIds} />
             {this.props.loading === 0
-              ? <PostList postsIds={this.props.postsIds} />
-              : <p>loading...</p>
+              ? <Fragment>
+                  <PostSort />
+                  <PostList postsIds={this.props.postsIds} />
+                </Fragment>
+              : <p>Loading...</p>
             }
           </div>
         </div>
@@ -50,10 +52,12 @@ class Category extends Component {
   }
 }
 
-function mapStateToProps ({posts, loadingBar}) {
+function mapStateToProps ({posts, loadingBar, user}) {
+  const postsSortingBy = user.config.postsSortingBy
+  const postsIds = sortPosts(postsSortingBy, posts)
   return {
-    postsIds: Object.keys(posts),
-    loading: loadingBar.default
+    postsIds,
+    loading: loadingBar.default,
   }
 }
 

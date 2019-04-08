@@ -5,7 +5,7 @@ import Footer from './Footer'
 import { connect } from 'react-redux'
 import { handlePostNewData } from '../actions/views'
 
-class NewPost extends Component {
+class PostNew extends Component {
   componentDidMount() {
     this.props.dispatch(handlePostNewData())
   }
@@ -18,8 +18,8 @@ class NewPost extends Component {
           <div className='content-container'>
             <h3>Create a New Post</h3>
             {this.props.loading === 0
-              ? <PostForm /> 
-              : <p>loading...</p>
+              ? <PostForm />
+              : <p>Loading...</p>
             }
           </div>
         </div>
@@ -32,8 +32,8 @@ class NewPost extends Component {
 
 function mapStateToProps ({loadingBar}) {
   return {
-    loading: loadingBar.default
+    loading: loadingBar.default,
   }
 }
 
-export default connect(mapStateToProps)(NewPost)
+export default connect(mapStateToProps)(PostNew)
