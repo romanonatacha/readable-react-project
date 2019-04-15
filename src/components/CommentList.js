@@ -23,7 +23,10 @@ class CommentList extends Component {
   }
 
   render() {
-    const { comments } = this.props
+
+    const { comments, user } = this.props
+    const { commentEditMode } = this.state
+
     return (
       <div className='comment-list'>
         <h3>Comments</h3>
@@ -37,15 +40,15 @@ class CommentList extends Component {
 
                 <CommentVoteScore commentId={comments[comment].id} score={comments[comment].voteScore} postId={comments[comment].parentId} />
 
-                {this.props.user.userId === comments[comment].author
+                {user.userId === comments[comment].author
                   ? <div className='comment-actions'>
                       <button onClick={(e) => this.handleDelete(e, comments[comment])} className='button-action'>Delete Comment</button>
-                      <button onClick={(e) => this.handleToggleEdit(e, comments[comment].id)} className={'button-action ' + (this.state.commentEditMode === comments[comment].id ? 'active' : 'not-active')}>Edit Comment</button>
+                      <button onClick={(e) => this.handleToggleEdit(e, comments[comment].id)} className={'button-action ' + (commentEditMode === comments[comment].id ? 'active' : 'not-active')}>Edit Comment</button>
                     </div>
                   : null
                 }
 
-                {this.state.commentEditMode === comments[comment].id &&
+                {commentEditMode === comments[comment].id &&
                   <CommentEditForm comment={comments[comment]} />
                 }
               </div>

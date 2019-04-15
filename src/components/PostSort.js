@@ -12,11 +12,14 @@ class PostSort extends Component {
   }
 
   render() {
+
+    const { postsSortingBy } = this.props
+
     return (
       <p className='category-order'>
         Order by:
-        {Object.keys(this.props.postsSortingBy).map(sort =>
-          <button key={sort} onClick={(e) => this.handleSetSorting(e, sort)} className={'button-action ' + (this.props.postsSortingBy[sort] ? 'active' : 'not-active')}>{sort}</button>
+        {Object.keys(postsSortingBy).map(sort =>
+          <button key={sort} onClick={(e) => this.handleSetSorting(e, sort)} className={'button-action ' + (postsSortingBy[sort] ? 'active' : 'not-active')}>{sort}</button>
         )}
       </p>
     )

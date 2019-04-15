@@ -11,9 +11,9 @@ class PostListItem extends Component {
       <div className='post-list-item'>
         <h2><Link to={`/${post.category}/${post.id}`} className='tweet'>{post.title}</Link></h2>
         <p className='post-info'>
-          <span className='post-author'>By: {post.author}</span>
-          <span className='post-datetime'>When: {formatDate(post.timestamp)}</span>
-          <span className='post-comment-count'>Comments: {post.commentCount}</span>
+          <span className='post-author'>{post.author}</span>
+          <span className='post-datetime'>{formatDate(post.timestamp)}</span>
+          <span className='post-comment-count'>comments: {post.commentCount}</span>
         </p>
         <PostVoteScore postId={post.id} score={post.voteScore} />
       </div>

@@ -5,11 +5,14 @@ import Footer from './Footer'
 import { connect } from 'react-redux'
 import { handlePostEditData } from '../actions/views'
 
-class PostEdit extends Component {
+class EditPost extends Component {
   componentDidMount() {
     this.props.dispatch(handlePostEditData())
   }
   render() {
+
+    const { loading, post } = this.props
+
     return (
       <Fragment>
         <Header />
@@ -17,8 +20,8 @@ class PostEdit extends Component {
         <div className='wrap-content'>
           <div className='content-container'>
             <h3>Editing Post</h3>
-            {this.props.loading === 0
-              ? <PostEditForm post={this.props.post} />
+            {loading === 0
+              ? <PostEditForm post={post} />
               : <p>Loading...</p>
             }
           </div>
@@ -37,4 +40,4 @@ function mapStateToProps ({loadingBar, posts}, props) {
   }
 }
 
-export default connect(mapStateToProps)(PostEdit)
+export default connect(mapStateToProps)(EditPost)

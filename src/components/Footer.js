@@ -5,7 +5,7 @@ class Footer extends Component {
     return (
       <footer>
         <div className='wrap-content'>
-          <p>React Redux Leitura - https://github.com/fernandoperigolo/leitura</p>
+          <p>React Redux Readable - Developed by Natacha Romano</p>
         </div>
       </footer>
     )

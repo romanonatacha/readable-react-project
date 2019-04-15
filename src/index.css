@@ -1,11 +1,4 @@
-/*
-Google Fonts Dosis for titles, buttons, etc and Open Sans for text
-*/
-@import url('https://fonts.googleapis.com/css?family=Dosis:200|Open+Sans');
-/*
-font-family: 'Dosis', sans-serif;
-font-family: 'Open Sans', sans-serif;
-*/
+@import url('https://fonts.googleapis.com/css?family=Didact+Gothic');
 
 /* Reset CSS */
 html, body, div, span, applet, object, iframe,
@@ -54,7 +47,7 @@ table {
 
 /* General */
 html {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Didact Gothic', sans-serif;
   font-size: 16px;
 }
 
@@ -71,19 +64,16 @@ h5,
 h6,
 .button,
 .label {
-  font-family: 'Dosis', sans-serif;
+  font-family: 'Didact Gothic', sans-serif;
 }
 
 .wrap-content {
-  max-width: 960px;
-  min-width: 320px;
-  margin: 0 auto;
   padding: 0 10px;
 }
 
 h1 {
-  padding: 40px 0;
-  font-size: 72px;
+  padding: 40px;
+  font-size: 45px;
   text-align: center;
   text-transform: uppercase;
   color: #fff;
@@ -150,7 +140,7 @@ select{
   appearance: none;
   font-size: 14px;
   line-height: 26px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Didact Gothic', sans-serif;
 }
 input[type=text]:focus,
 input[type=date]:focus,
@@ -172,11 +162,10 @@ textarea {
 }
 
 .button {
-  background: #9a9ae1;
+  background: #9549db;
   border: none;
   line-height: 40px;
   padding: 0 20px;
-  border-radius: 20px;
   color: #fff;
   font-weight: bold;
   font-size: 16px;
@@ -184,8 +173,6 @@ textarea {
 }
 .button-action {
   background: #fff;
-  border: 1px solid #666;
-  border-radius: 10px;
   margin: 0 10px;
   padding: 2px 10px;
   line-height: 1;
@@ -193,10 +180,11 @@ textarea {
   line-height: 12px;
   display: inline-block;
   vertical-align: top;
+  box-shadow: none;
+  border: none;
 }
 .button-action.active {
-  background: #666;
-  color: #fff;
+  border-bottom: solid 3px #9549db;
 }
 button {
   cursor: pointer;
@@ -217,11 +205,11 @@ button:focus {
 
 /* Header */
 header {
-  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+  background-color: black;
 }
 nav {
   text-align: center;
-  font-family: 'Dosis', sans-serif;
+  font-family: 'Didact Gothic', sans-serif;
 }
 nav ul {
   font-size: 0;
@@ -237,7 +225,7 @@ nav a {
   color: #fff;
 }
 nav a:hover {
-  border-bottom: 2px solid #fff;
+  color: #b76efc;
 }
 
 /* Content */
@@ -272,7 +260,7 @@ nav a:hover {
 
 .post-info {
   margin: 0 0 10px;
-  font-size: 12px;
+  font-size: 16px;
   color: #666;
 }
 .post-info span {
@@ -289,8 +277,7 @@ nav a:hover {
 }
 .post-score {
   display: inline-block;
-  background: #03A9F4;
-  background-image: linear-gradient(to right, #d16ba5, #9a9ae1);
+  background: #9549db;
   width: 54px;
   height: 54px;
   border-radius: 40px;
@@ -301,7 +288,7 @@ nav a:hover {
 .post-score-inner {
   display: block;
   background: #fff;
-  color: #03A9F4;
+  color: #9549db;
   font-weight: bold;
   width: 54px;
   height: 54px;
@@ -310,28 +297,29 @@ nav a:hover {
 .post-vote {
   display: inline-block;
   color: #fff;
-  height: 30px;
-  line-height: 30px;
-  border-radius: 30px;
   padding: 0 20px;
   border: none;
   font-size: 12px;
-  width: 115px;
   text-align: center;
 }
-.post-vote-up {
+.post-vote-down {
   margin: 0 -20px 0 0;
   padding-right: 33px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  background: #d16ba5;
+  color: #666;
+  background: none;
+  font-size: 40px;
 }
-.post-vote-down {
+.post-vote-up {
   margin: 0 0 0 -20px;
   padding-left: 33px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  background: #9a9ae1;
+  color: #9549db;
+  background: none;
+  font-size: 40px;
+}
+
+.post-vote-down:hover,
+.post-vote-up:hover {
+  transform: scale(1.1);
 }
 
 /* Category Order */
@@ -408,6 +396,11 @@ nav a:hover {
 }
 .comment-edit-form textarea {
   height: 130px;
+}
+
+.no-posts {
+  text-align: center;
+  margin-top: 30px;
 }
 
 /* Footer */

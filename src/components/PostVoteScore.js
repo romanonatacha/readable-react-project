@@ -20,15 +20,18 @@ class PostVoteScore extends Component {
   }
 
   render() {
+
+    const { score } = this.props
+
     return (
       <div className='post-votescore'>
-        <button onClick={this.handleIncrease} className='post-vote post-vote-up'>Vote Up</button>
+        <button onClick={this.handleIncrease} className='post-vote post-vote-up'><i class="fas fa-thumbs-up"></i></button>
         <span className='post-score'>
           <span className='post-score-inner'>
-            {this.props.score}
+            {score}
           </span>
         </span>
-        <button onClick={this.handleDecrease} className='post-vote post-vote-down'>Vote Down</button>
+        <button onClick={this.handleDecrease} className='post-vote post-vote-down'><i class="fas fa-thumbs-down"></i></button>
       </div>
     )
   }

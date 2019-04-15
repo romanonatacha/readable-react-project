@@ -44,6 +44,9 @@ class CommentEditForm extends Component {
   }
 
   render() {
+
+    const { submitedFlag, comment } = this.state
+
     return (
       <Fragment>
         <form onSubmit={this.handleSubmit} className='comment-edit-form'>
@@ -51,14 +54,14 @@ class CommentEditForm extends Component {
             <label htmlFor='body'>Content</label>
             <textarea
               placeholder="You are editing this comment"
-              value={this.state.comment.body}
+              value={comment.body}
               onChange={this.handleChange}
               className='textarea'
               id='body'
               required
             />
           </p>
-          {this.state.submitedFlag &&
+          {submitedFlag &&
             <p className='message-ok'>Your comment was saved.</p>
           }
           <p><input type="submit" className='button' value='Save Comment' /></p>

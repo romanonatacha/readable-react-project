@@ -39,7 +39,7 @@ class Post extends Component {
   }
 
   render() {
-    const { post, loading } = this.props
+    const { post, loading, user, match } = this.props
     const { redirectFlag, deletedFlag } = this.state
 
     if (!post && loading === 0) {
@@ -47,7 +47,7 @@ class Post extends Component {
     }
 
     if(redirectFlag === true) {
-      return <Redirect to={'/post/edit/' + this.props.post.id} />
+      return <Redirect to={'/post/edit/' + post.id} />
     }
 
     return (
@@ -65,7 +65,7 @@ class Post extends Component {
                   <span className='post-comment-count'>comments: {post.commentCount}</span>
                 </p>
 
-                {this.props.user.userId === post.author
+                {user.userId === post.author
                   ? <div className='post-actions'>
                       <button onClick={this.handleEdit} className='button-action'>Edit Post</button>
                       <button onClick={this.handleDelete} className='button-action'>Delete Post</button>
@@ -77,10 +77,10 @@ class Post extends Component {
                   {post.body}
                 </div>
 
-                <PostVoteScore postId={this.props.match.params.id} score={post.voteScore} />
+                <PostVoteScore postId={match.params.id} score={post.voteScore} />
 
-                <CommentList postId={this.props.match.params.id} />
-                <CommentForm postId={this.props.match.params.id} />
+                <CommentList postId={match.params.id} />
+                <CommentForm postId={match.params.id} />
               </div>
             }
 

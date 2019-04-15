@@ -5,11 +5,14 @@ import Footer from './Footer'
 import { connect } from 'react-redux'
 import { handlePostNewData } from '../actions/views'
 
-class PostNew extends Component {
+class NewPost extends Component {
   componentDidMount() {
     this.props.dispatch(handlePostNewData())
   }
   render() {
+
+    const { loading } = this.props
+
     return (
       <Fragment>
         <Header />
@@ -17,7 +20,7 @@ class PostNew extends Component {
         <div className='wrap-content'>
           <div className='content-container'>
             <h3>Create a New Post</h3>
-            {this.props.loading === 0
+            {loading === 0
               ? <PostForm />
               : <p>Loading...</p>
             }
@@ -36,4 +39,4 @@ function mapStateToProps ({loadingBar}) {
   }
 }
 
-export default connect(mapStateToProps)(PostNew)
+export default connect(mapStateToProps)(NewPost)

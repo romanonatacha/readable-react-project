@@ -13,17 +13,20 @@ class Home extends Component {
   }
 
   render() {
+
+    const { loading, postsIds } = this.props
+
     return (
       <Fragment>
         <Header />
 
         <div className='wrap-content'>
           <div className='content-container'>
-            <h3>Home - All Posts</h3>
-            {this.props.loading === 0
+            <h3>All Posts</h3>
+            {loading === 0
               ? <Fragment>
                   <PostSort />
-                  <PostList postsIds={this.props.postsIds} />
+                  <PostList postsIds={postsIds} />
                 </Fragment>
               : <p>Loading...</p>
             }

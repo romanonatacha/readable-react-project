@@ -3,13 +3,16 @@ import PostListItem from './PostListItem';
 
 class PostList extends Component {
   render() {
+
+    const { postsIds } = this.props
+
     return (
       <Fragment>
-        {this.props.postsIds.length > 0
-          ? this.props.postsIds.map((id) => (
+        {postsIds.length > 0
+          ? postsIds.map((id) => (
             <PostListItem key={id} id={id} />
             ))
-          : <p>No posts here</p>
+          : <p className='no-posts'>No posts here</p>
         }
       </Fragment>
     )

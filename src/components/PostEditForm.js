@@ -28,7 +28,11 @@ class PostEditForm extends Component {
   }
 
   render() {
-    if(this.state.submitedFlag){
+
+    const { submitedFlag, title, category, body } = this.state
+    const { categories } = this.props
+
+    if(submitedFlag){
       return <p className='message-ok'>Your post was updated.</p>
     }
     return (
@@ -40,17 +44,17 @@ class PostEditForm extends Component {
               type='text'
               id='title'
               placeholder='Post title goes here'
-              value={this.state.title}
+              value={title}
               onChange={this.handleChange}
               required
             />
           </p>
           <p>
             <label htmlFor='category'>Category</label>
-            <select onChange={this.handleChange} value={this.state.category} id='category' required>
+            <select onChange={this.handleChange} value={category} id='category' required>
               <option value="">Pick one here...</option>
-              {Object.keys(this.props.categories).map(categorie =>
-                <option value={this.props.categories[categorie].path} key={this.props.categories[categorie].path}>{this.props.categories[categorie].path}</option>
+              {Object.keys(categories).map(categorie =>
+                <option value={categories[categorie].path} key={categories[categorie].path}>{categories[categorie].path}</option>
               )}
             </select>
           </p>
@@ -58,7 +62,7 @@ class PostEditForm extends Component {
             <label htmlFor='body'>Content</label>
             <textarea
               placeholder="Tell me everything"
-              value={this.state.body}
+              value={body}
               onChange={this.handleChange}
               className='textarea'
               id='body'

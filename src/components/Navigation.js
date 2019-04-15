@@ -4,12 +4,15 @@ import { connect } from 'react-redux'
 
 class Navigation extends Component {
   render() {
+
+    const { categories } = this.props
+
     return (
       <nav>
         <ul>
           <li><NavLink to='/'>Home</NavLink></li>
-          {Object.keys(this.props.categories).map(categorie =>
-            <li key={this.props.categories[categorie].path}><NavLink to={`/${this.props.categories[categorie].path}`}>{this.props.categories[categorie].name}</NavLink></li>
+          {Object.keys(categories).map(categorie =>
+            <li key={categories[categorie].path}><NavLink to={`/${categories[categorie].path}`}>{categories[categorie].name}</NavLink></li>
           )}
           <li><NavLink to='/post/new'>Create New Post</NavLink></li>
         </ul>

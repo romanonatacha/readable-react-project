@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading'
 import Post from './Post'
-import PostNew from './PostNew'
-import PostEdit from './PostEdit'
+import NewPost from './NewPost'
 import Category from './Category'
 import Home from './Home'
 import PageNotFound from './PageNotFound';
+import EditPost from './EditPost';
 
 class App extends Component {
   render() {
@@ -17,8 +17,8 @@ class App extends Component {
           <LoadingBar style={{backgroundColor: 'greenyellow'}} />
           <Switch>
             <Route path='/404' exact component={PageNotFound} />
-            <Route path='/post/new' exact component={PostNew} />
-            <Route path='/post/edit/:id' exact component={PostEdit} />
+            <Route path='/post/new' exact component={NewPost} />
+            <Route path='/post/edit/:id' exact component={EditPost} />
             <Route path='/:categoryPath/:id' exact component={Post} />
             <Route path='/:categoryPath' exact component={Category} />
             <Route path='/' exact component={Home} />

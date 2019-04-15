@@ -6,7 +6,7 @@ class Header extends Component {
     return (
       <header>
         <div className='wrap-content'>
-          <h1>Leitura</h1>
+          <h1>readable</h1>
           <Navigation />
         </div>
       </header>
